@@ -16,7 +16,11 @@ class SimpleContactForm {
 
    public function __construct()
    {
+      //Create custom post type
       add_action('init', array($this, 'create_custom_post_type'));
+   
+      //Add assets
+      add_action('wp_enqueue_scripts', array($this. 'loadAssets'));
    }
 
    public function create_custom_post_type(){
@@ -37,6 +41,16 @@ class SimpleContactForm {
       );
 
       register_post_type('simple_contactr_form', $args);
+   }
+
+   public function loadAssets(){
+      wp_enqueue_style(
+         'simple-contact-form',
+         plugin_dir_url( __FILE__ ) . '/css/simple-contact-form.css',
+         array(),
+         1,
+         'all',
+      );
    }
 
 }
